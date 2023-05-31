@@ -37,6 +37,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
                 </li>
+
+
+                <li class="nav-item d-none d-sm-inline-block">
+                    <form method = "post" action = "{{ route('logout') }}">
+                        @csrf
+                        <input type="hidden" name="_token" value =" {{ csrf_token() }}">
+                        <button type="submit" class="btn btn-outline-primary text-white bg-primary">Logout</button>
+
+                    </form>
+                </li>
+
             </ul>
 
             <!-- Right navbar links -->
@@ -185,9 +196,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
                             alt="User Image">
                     </div>
+
+
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
-                    </div>
+                        <a href="#"class="d-block">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
+                 </div>
                 </div>
 
                 <!-- SidebarSearch Form -->
@@ -275,7 +288,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content">
                 <div class="container-fluid">
 
-                        @yield('content')
+                    @yield('content')
 
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -316,6 +329,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+
     @stack('js')
 </body>
 
